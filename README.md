@@ -22,8 +22,11 @@
 4. 浏览器打开 HTML。
 
 ## 立场配置
-编辑 `myCompany.json`：`{ "active": "qianwen-office" }`。
-预设见 `references/companyMatrix.json`（tencent / aliyun / huawei / aws / azure / moonshot / zhipu / baichuan / qianwen-office）。自定义加到 `myCompany.json.profiles`。
+仓库已附带默认 `myCompany.json`，内容为 `{ "active": "qianwen-office" }`，开箱即用。切换立场直接编辑该文件把 `active` 改成 `companyMatrix.json` 里的预设键（tencent / aliyun / huawei / aws / azure / moonshot / zhipu / baichuan / qianwen-office）；自定义立场加到 `profiles`，例如：
+```json
+{ "active": "my-co", "profiles": { "my-co": { "companyName": "我的公司", "products": [...], "strengths": [...], "competitors": [...], "avoidPhrases": [...], "defaultPositioning": "..." } } }
+```
+也可在对话里直接说"以千问办公立场分析 XX"，无需改文件。
 
 ## 目录结构
 ```
@@ -40,7 +43,14 @@ sales-coach/
 ```
 
 ## 数据目录
-默认 `~/.workbuddy/sales-coach/`，含 `clients/<客户>.md` 与 `myCompany.json`。可按环境改路径。
+- **WorkBuddy**：`~/.workbuddy/sales-coach/`（含 `clients/<客户>.md` 与 `myCompany.json`）。
+- **其他平台（千问办公 / QoderWork / Cursor / Codex）**：用**项目相对路径**，即本仓库下的 `clients/` 与 `myCompany.json`。客户档案与立场文件随项目走，便于团队共享同一份配置。
+
+## 已验证平台（含千问办公 / QoderWork）
+两个平台**均支持「加载 AGENTS.md 作为自定义指令」+「运行 Python 脚本」**，可完整使用（含可视化 HTML 作战卡）：
+- **QoderWork**（阿里 AI 编程 IDE）：把 `AGENTS.md` 并入项目指令 → 终端跑 `python3 references/gen_card_html.py clients/<客户>.md` → 生成的 `_card.html` 在 IDE 预览/浏览器打开。
+- **千问办公**（钉钉/千问办公 AI 套件）：把 `AGENTS.md` 设为自定义智能体指令 → 终端/代码节点跑同上命令 → 生成后把 HTML 路径发用户，由用户浏览器打开。
+- 工具差异：原 `WebSearch`/`WebFetch`/`present_files` 为 WorkBuddy 专用；其他平台用其内置搜索+代码执行替代，并改用「告知文件路径」方式展示 HTML（详见 SKILL.md Platform Support 段）。
 
 ## 贡献
 Fork → 改 → 提 PR。常见优化：扩充 `companyMatrix.json` 立场、丰富 `searchQueries.md`、改进 `gen_card_html.py` 可视化。

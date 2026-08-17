@@ -15,9 +15,17 @@ Agent 工作流。替代原小程序方案中"付费搜索 API + 云函数 + 云
 - 文件系统（markdown）替代云开发 DB，承载客户档案与策略快照
 - 对话上下文天然支撑「反哺线索 → 重新分析」闭环
 
-数据目录（默认，可由用户改）：`~/.workbuddy/sales-coach/`
-- `clients/<归一化名>.md` —— 每个客户一份档案（情报缓存 + 已验证/推断 + 决策链 + 策略快照）
-- `myCompany.json` —— 我方立场开关（`active` 指向矩阵预设键或 `profiles` 自定义键）
+数据目录（默认，可由用户改）：`~/.workbuddy/sales-coach/`，存放客户档案 `clients/<归一化名>.md`（情报缓存 + 已验证/推断 + 决策链 + 策略快照）。
+我方立场文件 `myCompany.json` **随本 skill 仓库发布在根目录**（默认 `active: qianwen-office`），开箱即用；如需按项目/团队分立场，可把它复制到数据目录或项目根覆盖。
+
+## Platform Support（平台适配）
+
+本 skill 已验证可在以下平台运行，**两类平台均支持「加载本仓库的 AGENTS.md 作为自定义指令」+「运行 Python 脚本」**：
+
+- **WorkBuddy**（原生）：放 `~/.workbuddy/skills/sales-coach/`，对话触发；HTML 用 `present_files` 在面板预览。
+- **千问办公 / QoderWork**（阿里系）：把 `AGENTS.md` 内容并入其「自定义指令 / system prompt」，在终端运行 `python3 references/gen_card_html.py clients/<客户>.md` 生成 HTML。QoderWork 为 IDE，生成后可在预览/浏览器直接打开；千问办公为对话式办公 AI，生成后请**告知用户 HTML 文件路径**，由用户自行在浏览器打开。
+
+**工具名替换**：`WebSearch` / `WebFetch` 为 WorkBuddy 原生工具名；在千问办公 / QoderWork 中，用其内置的联网搜索与代码执行能力替代（功能等价，流程不变）。`present_files` 同理仅 WorkBuddy 有，其他平台改用「告知文件路径」方式展示。
 
 ## CRITICAL RULES（硬性铁律，违反任一条都会产出误导性结果）
 
@@ -118,8 +126,9 @@ Agent 工作流。替代原小程序方案中"付费搜索 API + 云函数 + 云
 - **可视化 HTML 作战卡（标准产出，必做）**：md 落盘后运行
   `python3 references/gen_card_html.py clients/<归一化名>.md`
   → 同目录生成 `<归一化名>_card.html`（原子写，复用 md 全部内容与来源代号）。
-  **随后用 `present_files` 打开该 HTML**：`.md` 在右侧预览面板只列卡片、不渲染正文，
-  而 `.html` 会直接在面板渲染，确保用户能直观看到作战卡。每次跑客户都走这一步，无需用户额外要求。
+  **打开 HTML（按平台）**：
+  - WorkBuddy：用 `present_files` 在右侧预览面板直接渲染 `.html`（`.md` 不渲染正文，须用 html）。
+  - 千问办公 / QoderWork：生成后**告知用户 `_card.html` 的文件路径**，由用户在预览/浏览器自行打开（这两个平台无 `present_files` 工具）。每次跑客户都生成 HTML，无需用户额外要求。
   - **META 驱动仪表盘头**：指标瓷砖 / 阶段流水线 / 策略行动瓷砖 / 生态关系徽章 / 新鲜度徽章 / 下一步行动常驻条，
     均由 META 块渲染；模块②"近期动向"日期前缀 bullet → 竖向时间线；来源代号 → 置信度配色（含中性兜底）+ 图例；
     顶部粘性目录 + 纯 CSS 折叠 + 打印/PDF 优化对所有卡通用。

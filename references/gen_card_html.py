@@ -19,8 +19,10 @@ gen_card_html.py — 把 sales-coach 作战卡 Markdown 编译成可视化 HTML�
 import sys
 import re
 import os
+import json
 import html as _html
 from datetime import datetime
+from pathlib import Path
 
 CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
 ACCENT = "#FF6A00"
@@ -586,6 +588,78 @@ def card_html(tid, badge, label, body):
 
 
 # --------------------------------------------------------------------------- #
+# 我方立场面板（架构修复：立场库单源，改库即改卡）
+# --------------------------------------------------------------------------- #
+def load_stance_profile(meta: dict):
+    """从立场库 companyMatrix.json 读取当前激活立场档案（myCompany.json.active 决定），
+    作为渲染卡中『我方立场』面板的权威来源——立场库一改、重渲染即生效，无需改客户 .md。
+    缺失文件 / 键 → 返回 None（降级为不渲染该面板，不影响其他组件，存量卡 100% 兼容）。"""
+    here = Path(__file__).resolve().parent
+    matrix_path = here / "companyMatrix.json"
+    if not matrix_path.is_file():
+        return None
+    try:
+        with open(matrix_path, encoding="utf-8") as f:
+            matrix = json.load(f)
+    except Exception:
+        return None
+    if not isinstance(matrix, dict):
+        return None
+    # 1) 优先 myCompany.json.active
+    active = None
+    mc_path = here.parent / "myCompany.json"
+    if mc_path.is_file():
+        try:
+            with open(mc_path, encoding="utf-8") as f:
+                active = json.load(f).get("active")
+        except Exception:
+            pass
+    # 2) 回退：从 META stance 文本匹配公司名
+    if not active and meta.get("stance"):
+        for key, prof in matrix.items():
+            if isinstance(prof, dict) and prof.get("companyName", "") and prof["companyName"] in meta["stance"]:
+                active = key
+                break
+    if not active:
+        active = "qianwen-office"
+    prof = matrix.get(active)
+    return prof if isinstance(prof, dict) else None
+
+
+def render_stance_panel(profile: dict) -> str:
+    """『我方立场』权威面板：直接来自 companyMatrix.json，渲染卡永远反映当前立场库立场，
+    消除手誊散文与立场库的措辞漂移。"""
+    if not profile:
+        return ""
+    name = profile.get("companyName", "")
+    ba = profile.get("brandArchitecture", "")
+    prods = profile.get("products", []) or []
+    ba_html = f'<div class="sp-arch">{inline(ba)}</div>' if ba else ""
+    prod_items = ""
+    if prods:
+        items = []
+        for p in prods:
+            if isinstance(p, dict):
+                pn = p.get("name", "")
+                pt = (
+                    p.get("tagline")
+                    or p.get("value")
+                    or p.get("desc")
+                    or p.get("positioning")
+                    or ""
+                )
+                items.append(
+                    f'<li><span class="sp-name">{inline(pn)}</span>'
+                    f'<span class="sp-desc">{inline(str(pt))}</span></li>'
+                )
+            else:
+                items.append(f"<li>{inline(str(p))}</li>")
+        prod_items = '<ul class="sp-prods">' + "".join(items) + "</ul>"
+    body = ba_html + prod_items
+    return card_html("stance", "🏳", f"我方立场 · {name}", body)
+
+
+# --------------------------------------------------------------------------- #
 # 主流程
 # --------------------------------------------------------------------------- #
 def gen(md_path: str) -> str:
@@ -692,6 +766,11 @@ def gen(md_path: str) -> str:
     if source_html:
         toc.append(("信息来源", "sources"))
 
+    stance_profile = load_stance_profile(meta)
+    stance_panel = render_stance_panel(stance_profile)
+    if stance_panel:
+        toc.append(("我方立场", "stance"))
+
     dashboard = render_dashboard(meta, next_action)
 
     toc_html = '<nav class="toc">' + "".join(
@@ -708,6 +787,7 @@ def gen(md_path: str) -> str:
         + subtitle_html
         + toc_html
         + dashboard
+        + stance_panel
         + tldr_html
         + cards_html
         + roles_html
@@ -841,6 +921,14 @@ body {
 .body-list li { margin: 4px 0; }
 .note { background: #fff8f1; border-left: 3px solid var(--accent); border-radius: 6px; padding: 8px 12px; margin: 8px 0; font-size: 13.5px; color: #5a4632; }
 
+/* 我方立场面板（来自立场库，权威单源，改库即改卡） */
+.sp-arch { background: #fff8f1; border-left: 3px solid var(--accent); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; font-size: 13.5px; color: #5a4632; font-weight: 600; line-height: 1.65; }
+.sp-prods { list-style: none; padding-left: 0; margin: 6px 0 0; }
+.sp-prods li { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); align-items: baseline; }
+.sp-prods li:last-child { border-bottom: none; }
+.sp-name { flex: none; min-width: 134px; font-weight: 800; color: var(--accent); }
+.sp-desc { color: var(--ink); font-size: 13.5px; }
+
 /* 来源标签：正文不渲染（收集到底部汇总表）——保留 .tag 类定义以防遗漏 */
 .tag { display: none; }
 
@@ -917,6 +1005,7 @@ body {
 @media (prefers-color-scheme: dark) {
   :root { --ink: #e8eaed; --muted: #9aa3af; --line: #2a2f3a; --bg: #0f1216; --card: #171b21; }
   .metric, .card, .toc a, .src-table { background: var(--card); }
+  .sp-arch { background: #2a2118; color: #e8d9c8; }
   .hl-red { background: #3a1d1d; } .hl-green { background: #16301f; } .hl-orange { background: #33260f; }
 }
 

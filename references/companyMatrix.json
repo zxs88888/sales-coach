@@ -1,0 +1,196 @@
+{
+  "tencent": {
+    "companyName": "腾讯云",
+    "products": [
+      { "name": "混元大模型", "category": "大模型", "scenarios": ["零售智能客服", "游戏NPC", "金融风控"] },
+      { "name": "TI-ONE", "category": "AI平台", "scenarios": ["模型训练", "MLOps"] },
+      { "name": "TKE", "category": "容器", "scenarios": ["GPU弹性调度", "混合部署"] }
+    ],
+    "strengths": ["社交生态联动", "C端产品经验", "混元多模态", "价格竞争力"],
+    "weaknesses": ["政企渠道较弱", "行业解决方案深度不足", "私有云部署"],
+    "competitors": [
+      { "name": "阿里云", "knownWeaknesses": ["C端生态弱", "大模型起步晚于百度"] },
+      { "name": "华为云", "knownWeaknesses": ["ISV生态小", "海外覆盖弱"] },
+      { "name": "AWS", "knownWeaknesses": ["国内合规风险", "中文支持弱"] },
+      { "name": "月之暗面(Kimi)", "knownWeaknesses": ["B端渠道弱", "无自有云基础设施"] },
+      { "name": "智谱AI(GLM)", "knownWeaknesses": ["C端体验弱", "无自有云基础设施"] },
+      { "name": "百度(文心)", "knownWeaknesses": ["云市场份额下滑", "用户体验争议"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用", "数据出境风险"] }
+    ],
+    "caseIndustries": ["零售", "游戏", "金融", "传媒"],
+    "avoidPhrases": ["贬低OpenAI"],
+    "defaultPositioning": "以C端+AI联动为差异化切入点，不拼价格拼生态"
+  },
+  "aliyun": {
+    "companyName": "阿里云",
+    "products": [
+      { "name": "通义千问", "category": "大模型", "scenarios": ["电商推荐", "物流优化", "金融分析"] },
+      { "name": "PAI", "category": "AI平台", "scenarios": ["模型训练", "数据处理"] },
+      { "name": "ACK", "category": "容器", "scenarios": ["GPU弹性调度", "混合部署"] }
+    ],
+    "strengths": ["政企渠道强", "全线产品覆盖", "双11技术底蕴", "阿里生态"],
+    "weaknesses": ["C端生态弱于腾讯", "大模型起步晚于百度"],
+    "competitors": [
+      { "name": "腾讯云", "knownWeaknesses": ["政企渠道弱", "行业方案深度不足"] },
+      { "name": "华为云", "knownWeaknesses": ["ISV生态小", "海外覆盖弱"] },
+      { "name": "AWS", "knownWeaknesses": ["国内合规风险", "中文支持弱"] },
+      { "name": "月之暗面(Kimi)", "knownWeaknesses": ["B端渠道弱", "无自有云基础设施"] },
+      { "name": "智谱AI(GLM)", "knownWeaknesses": ["C端体验弱", "无自有云基础设施"] },
+      { "name": "百度(文心)", "knownWeaknesses": ["自研芯片缺失", "海外覆盖弱"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用", "数据出境风险"] }
+    ],
+    "caseIndustries": ["零售", "金融", "制造", "互联网"],
+    "avoidPhrases": ["贬低华为"],
+    "defaultPositioning": "以全线产品+政企服务为差异化，强调稳定性和生态整合"
+  },
+  "huawei": {
+    "companyName": "华为云",
+    "products": [
+      { "name": "盘古大模型", "category": "大模型", "scenarios": ["政务", "制造", "矿山"] },
+      { "name": "ModelArts", "category": "AI平台", "scenarios": ["模型训练", "行业方案"] },
+      { "name": "CCE", "category": "容器", "scenarios": ["GPU弹性调度", "混合部署"] }
+    ],
+    "strengths": ["政企关系深", "自研芯片", "行业方案完整", "数据安全合规"],
+    "weaknesses": ["ISV生态较小", "海外市场覆盖弱", "开发者社区弱于阿里"],
+    "competitors": [
+      { "name": "阿里云", "knownWeaknesses": ["C端生态弱"] },
+      { "name": "腾讯云", "knownWeaknesses": ["政企渠道弱"] },
+      { "name": "AWS", "knownWeaknesses": ["国内合规风险"] },
+      { "name": "月之暗面(Kimi)", "knownWeaknesses": ["B端渠道弱", "无自有云基础设施"] },
+      { "name": "百度(文心)", "knownWeaknesses": ["用户体验争议"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用", "数据出境风险"] },
+      { "name": "Anthropic", "knownWeaknesses": ["中文能力弱", "国内不可用"] }
+    ],
+    "caseIndustries": ["制造", "政务", "矿山", "交通"],
+    "avoidPhrases": ["贬低腾讯"],
+    "defaultPositioning": "以自研芯片+数据安全为差异化，主打政企和实体经济"
+  },
+  "aws": {
+    "companyName": "AWS",
+    "products": [
+      { "name": "Bedrock", "category": "大模型", "scenarios": ["多模型选择", "企业AI"] },
+      { "name": "SageMaker", "category": "AI平台", "scenarios": ["模型训练", "MLOps"] },
+      { "name": "EKS", "category": "容器", "scenarios": ["GPU弹性调度", "全球部署"] }
+    ],
+    "strengths": ["全球覆盖最广", "产品成熟度高", "ISV生态丰富", "英文技术资源多"],
+    "weaknesses": ["国内合规风险", "中文支持弱", "国内服务响应慢"],
+    "competitors": [
+      { "name": "阿里云", "knownWeaknesses": ["海外覆盖弱", "GCC(海湾)市场弱"] },
+      { "name": "华为云", "knownWeaknesses": ["ISV生态小"] },
+      { "name": "Azure", "knownWeaknesses": ["国内数据中心少", "价格偏高"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用", "数据出境风险"] },
+      { "name": "Anthropic", "knownWeaknesses": ["中文能力弱", "国内不可用"] }
+    ],
+    "caseIndustries": ["跨国企业", "互联网", "游戏", "制药"],
+    "avoidPhrases": ["贬低中国云厂商"],
+    "defaultPositioning": "以全球部署+成熟生态为差异化，主打跨国企业和出海场景"
+  },
+  "azure": {
+    "companyName": "Azure",
+    "products": [
+      { "name": "Azure OpenAI Service", "category": "大模型", "scenarios": ["企业GPT集成", "代码生成", "知识管理"] },
+      { "name": "Azure Machine Learning", "category": "AI平台", "scenarios": ["模型训练", "MLOps", "自动化ML"] },
+      { "name": "AKS", "category": "容器", "scenarios": ["GPU弹性调度", "混合部署", "Windows容器"] }
+    ],
+    "strengths": ["OpenAI独家合作", "企业级合规", "Office/Teams生态联动", "混合云方案成熟"],
+    "weaknesses": ["国内数据中心少", "中文支持弱", "价格偏高"],
+    "competitors": [
+      { "name": "AWS", "knownWeaknesses": ["中文支持弱", "国内合规风险"] },
+      { "name": "阿里云", "knownWeaknesses": ["海外生态弱"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用", "数据出境风险"] },
+      { "name": "智谱AI(GLM)", "knownWeaknesses": ["C端体验弱"] },
+      { "name": "Anthropic", "knownWeaknesses": ["中文能力弱"] }
+    ],
+    "caseIndustries": ["跨国企业", "金融", "医药", "制造"],
+    "avoidPhrases": ["贬低GPT或OpenAI"],
+    "defaultPositioning": "以OpenAI独家合作+企业合规为差异化，主打外企和出海"
+  },
+  "moonshot": {
+    "companyName": "月之暗面",
+    "products": [
+      { "name": "Kimi Chat", "category": "大模型", "scenarios": ["长文档处理", "知识工作", "科研辅助"] }
+    ],
+    "strengths": ["超长上下文", "价格竞争力", "C端口碑好"],
+    "weaknesses": ["政企渠道弱", "B端生态不成熟", "品牌认知度待提升"],
+    "competitors": [
+      { "name": "智谱(GLM)", "knownWeaknesses": ["C端体验弱"] },
+      { "name": "百度(文心)", "knownWeaknesses": ["用户体验争议"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用"] },
+      { "name": "阿里云(通义)", "knownWeaknesses": ["B端产品同质化"] },
+      { "name": "腾讯云(混元)", "knownWeaknesses": ["B端起步晚"] }
+    ],
+    "caseIndustries": ["科研", "法律", "金融分析", "教育"],
+    "avoidPhrases": ["贬低OpenAI"],
+    "defaultPositioning": "以超长上下文+极致性价比为差异化，主攻知识密集型场景"
+  },
+  "zhipu": {
+    "companyName": "智谱AI",
+    "products": [
+      { "name": "GLM-4", "category": "大模型", "scenarios": ["政企智能", "代码生成", "知识图谱"] },
+      { "name": "ChatGLM", "category": "大模型", "scenarios": ["对话助手", "企业知识库"] }
+    ],
+    "strengths": ["清华系技术底蕴", "国产化自主可控", "政企合作深", "开源社区活跃"],
+    "weaknesses": ["C端产品体验弱", "开发者生态不如百度", "品牌出圈不足"],
+    "competitors": [
+      { "name": "月之暗面(Kimi)", "knownWeaknesses": ["政企渠道弱", "B端不成熟"] },
+      { "name": "百度(文心)", "knownWeaknesses": ["用户体验争议"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用"] },
+      { "name": "阿里云(通义)", "knownWeaknesses": ["B端产品同质化"] }
+    ],
+    "caseIndustries": ["政务", "教育", "科研", "金融"],
+    "avoidPhrases": ["贬低清华或学术圈"],
+    "defaultPositioning": "以国产自主可控+学术底蕴为差异化，主打政务和教育"
+  },
+  "baichuan": {
+    "companyName": "百川智能",
+    "products": [
+      { "name": "百川大模型", "category": "大模型", "scenarios": ["医疗助手", "法律文书", "搜索增强"] },
+      { "name": "百川智能助手", "category": "大模型", "scenarios": ["企业问答", "行业方案"] }
+    ],
+    "strengths": ["搜索增强能力", "医疗/法律垂直领域", "王小川技术品牌", "快速迭代"],
+    "weaknesses": ["起步较晚", "市场份额小", "B端渠道弱"],
+    "competitors": [
+      { "name": "智谱(GLM)", "knownWeaknesses": ["C端体验弱"] },
+      { "name": "月之暗面(Kimi)", "knownWeaknesses": ["垂直行业积累不足"] },
+      { "name": "OpenAI", "knownWeaknesses": ["国内合规不可用"] }
+    ],
+    "caseIndustries": ["医疗", "法律", "搜索", "教育"],
+    "avoidPhrases": ["贬低搜狗"],
+      "defaultPositioning": "以搜索增强+垂直行业深耕为差异化，主打医疗和法律"
+  },
+  "qianwen-office": {
+    "companyName": "千问办公（阿里）",
+    "products": [
+      { "name": "钉钉", "category": "企业协同IM/组织入口", "scenarios": ["组织通讯","审批/通讯录/会议","低代码","AI生态入口(2000万+组织/2亿月活)"] },
+      { "name": "悟空", "category": "企业级AI Agent/数字员工", "scenarios": ["钉钉原生'沟通即执行'","直接操作文档/日程/审批","本地应用深度控制(Excel/浏览器/IDE)","十大'一人团队'场景"], "pricing": "普通¥39/月/人(1000算粒) 高级¥99/月/人(3000算粒) Beta邀测中" },
+      { "name": "Qoder / QoderWork (Qoder CN)", "category": "AI编程+桌面工作智能体", "scenarios": ["代码生成/工程级Agent","桌面办公自动化","数字员工(QoderWake 7x24)"], "pricing": "原通义灵码2026-05-20更名 统一Credits制 国内部署支持GLM/DeepSeek/Kimi/MiniMax" },
+      { "name": "MuleRun（骡子快跑）", "category": "AI工作空间/数字劳动力", "scenarios": ["云端VM沙箱多Agent并行","200+即插即用Mule Agents","电商运营/市场营销/跨应用自动化","7x24云端执行"], "pricing": "Team ¥420/席/月(2000Credits) Enterprise ¥2500/席/年 已服务43国" }
+    ],
+    "strengths": [
+      "钉钉2000万+组织/2亿月活天然入口，获客成本极低",
+      "ATH事业群闭环(通义发电→MaaS输电→Agent用电)，底层Qwen3.7-Max推理+40%",
+      "三产品整合为统一企业生产力AI：悟空(钉钉协同)+QoderWork(桌面)+MuleRun(云端执行)，钉钉CEO陈宇森统管",
+      "企业级安全：本地沙盒+云端沙箱双模，等保三级/GDPR/SOC2，适配国产化内网部署",
+      "无缝迁移：现有用户权益/数据无损，不强制换客户端",
+      "'一人团队(OPT)'开箱模板，直击中长尾中小企业降本增效"
+    ],
+    "weaknesses": [
+      "整合过渡期：三产品仍各自品牌运营，统一产品名片未定，功能重叠易致用户困惑",
+      "悟空仍Beta邀测，规模化交付与SLA待验证",
+      "C端个人生产力心智弱于飞书/Notion",
+      "政企渠道/私有化交付弱于华为",
+      "与企微(独门连接微信)/飞书(协作强)正面竞争，存量钉钉组织外获客难",
+      "算粒/Credits计量对非技术买家有认知门槛"
+    ],
+    "competitors": [
+      { "name": "企业微信+腾讯文档", "knownWeaknesses": ["独门'唯一连接微信用户'但AI Agent整合弱于悟空","无独立编程Agent","腾讯WorkBuddy自成体系分流"] },
+      { "name": "飞书(Lark)", "knownWeaknesses": ["月活仅3000万(钉钉1/6)","存量钉钉/企微用户切换成本高","Agent生态相对封闭"] },
+      { "name": "微软365+Copilot", "knownWeaknesses": ["~$30/用户/月价格高","中文企业场景弱","国内合规/数据出境风险"] },
+      { "name": "WPS AI", "knownWeaknesses": ["6.78亿设备基数但无协同IM底座","无跨系统自动化"] },
+      { "name": "同生态其他钉钉服务商(典名科技等六星钻石)", "knownWeaknesses": ["渠道价格战","交付能力参差","但本地关系深"] }
+    ],
+    "caseIndustries": ["电商","零售","制造","专业服务(财税/律所/猎头)","教育","金融","政务","互联网"],
+    "avoidPhrases": ["贬低飞书","贬低企业微信","贬低微软","贬低WPS"],
+    "defaultPositioning": "以钉钉2000万组织入口+企业级AI原生(悟空'沟通即执行')+QoderWork桌面+MuleRun云端执行的全栈数字员工为差异化，主打'一个钉钉入口，让每个组织拥有AI团队'，用'一人团队'模板撬动长尾中小企业降本增效"
+  }
+}
